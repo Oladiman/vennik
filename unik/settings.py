@@ -26,7 +26,7 @@ SECRET_KEY = '%*=q&brk*(+si$#+dv^&p+!#=j2evx33+%ij2vv*qjw3+_t=gg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vennik.herokuapp.com']
 
 
 # Application definition
