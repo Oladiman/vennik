@@ -14,6 +14,9 @@ def products(request):
 def login(request):
     return render(request,'vennik/login.html')
 
+def logout(request):
+    return render(request,'vennik/logout.html')
+
 def register(request):
     return render(request,'vennik/register.html')    
 

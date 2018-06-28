@@ -1,0 +1,4 @@
+venv
+.vscode
+*.pyc
+VENNIK/ignore_directory

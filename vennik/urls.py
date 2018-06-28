@@ -1,13 +1,13 @@
 from django.contrib import admin
 from django.urls import path
 from vennik import views
-from django.contrib.auth.views import login
+from django.contrib.auth.views import login,logout
 urlpatterns = [
     path('index.html', views.index , name="index"),
     path('home.html', views.home, name='home'),
     path('', views.index ,name='index'),
     path('products.html', views.products, name='products'),
-    path('login.html' ,views.login ,name='login'),
+    # path('login.html' ,views.login ,name='login'),
     path('register.html',views.register ,name='register'),
     path('contact.html', views.contact ,name='contact'),
     path('single.html',views.single ,name='single'),
@@ -19,5 +19,6 @@ urlpatterns = [
     path('human-services.html',views.human,name='human'),
     path('undeveloped-land.html',views.undeveloped,name='undeveloped'),
     path('properties-for-sale.html',views.properties,name='properties'),
-    # path('',login,{'template_name':'vennik/login.html'})
+    path('login.html',login,{'template_name':'vennik/login.html'}),
+    path('logout',logout,{'template_name':'vennik/logout.html'})
 ]
