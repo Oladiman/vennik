@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from decouple import config,Csv
+from unipath import Path
+from dj_database_url import parse as db_url
+SECRET_KEY = config('SECRET_KEY')
+# DEBUG=False python manage.py
+EMAIL_HOST = config('EMAIL_HOST', default='localhost')
+EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,9 +32,9 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 SECRET_KEY = '%*=q&brk*(+si$#+dv^&p+!#=j2evx33+%ij2vv*qjw3+_t=gg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=TFalse, cast=bool)
 
-ALLOWED_HOSTS = ['vennik.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['vennik.herokuapp.com','127.0.0.1','deevennik.herokuapp.com']
 
 
 # Application definition
@@ -76,14 +83,29 @@ WSGI_APPLICATION = 'unik.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+#         'PORT': '',
+#     }
+    
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -122,6 +144,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL='/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_DIRS = [STATIC_DIR, ]
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [STATIC_DIR, ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

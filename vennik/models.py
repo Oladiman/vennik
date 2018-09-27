@@ -23,7 +23,7 @@ class Apartment(models.Model):
     type=models.CharField(default="", max_length=50)
     description = models.CharField(default='', max_length=50)
     # apartmentName=models.OneToOneField(Group, on_delete=models.CASCADE)
-class Good(models.Model):
+class Good(models.Model):uire
     price = models.IntegerField(default='0')
     description = models.CharField(default='', max_length=50) 
     # name=models.OneToOneField(Group, on_delete=models.CASCADE)
