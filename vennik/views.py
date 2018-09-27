@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render,redirect
+from vennik.forms import registrationForm
+from django.contrib.auth.views import login
 
 # Create your views here.
 def index(request):
@@ -12,13 +13,24 @@ def products(request):
     return render(request, 'vennik/products.html')
 
 def login(request):
-    return render(request,'vennik/login.html')
+    if request.method == POST:
+        form = login(request.POST)
+        if form.is_valid:
+            return render(request,'vennik/login.html')
 
 def logout(request):
     return render(request,'vennik/logout.html')
 
 def register(request):
-    return render(request,'vennik/register.html')    
+    if request.method == 'POST':
+        form = registrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/index')
+    else:
+        form = registrationForm()
+        args = {'form':form}
+        return render(request,'vennik/register.html',args)    
 
 def contact(request):
     return render(request, 'vennik/contact.html')
