@@ -19,12 +19,12 @@ post_save.connect(create_Profile,sender=User)
 
 class Apartment(models.Model):
     location=models.CharField(max_length=50, default='')
-    price=models.IntegerField(default='0')
+    price=models.IntegerField(default=0)
     type=models.CharField(default="", max_length=50)
     description = models.CharField(default='', max_length=50)
     # apartmentName=models.OneToOneField(Group, on_delete=models.CASCADE)
-class Good(models.Model):uire
-    price = models.IntegerField(default='0')
+class Good(models.Model):
+    price = models.IntegerField(default=0)
     description = models.CharField(default='', max_length=50) 
     # name=models.OneToOneField(Group, on_delete=models.CASCADE)
 
