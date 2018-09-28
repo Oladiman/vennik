@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
-from vennik.forms import registrationForm
+from vennik.forms import RegistrationForm
 from django.contrib.auth.views import login
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserChangeForm
 
 # Create your views here.
 def index(request):
@@ -13,7 +15,7 @@ def products(request):
     return render(request, 'vennik/products.html')
 
 def login(request):
-    if request.method == POST:
+    if request.method == 'POST':
         form = login(request.POST)
         if form.is_valid:
             return render(request,'vennik/login.html')
@@ -21,14 +23,32 @@ def login(request):
 def logout(request):
     return render(request,'vennik/logout.html')
 
-def register(request):
+
+def view_profile(request):
+    args={'user':request.user}
+    return render(request,'vennik/profile.html',args)
+
+
+def edit_profile(request):
     if request.method == 'POST':
-        form = registrationForm(request.POST)
+        form = UserChangeForm(request.POST,instance=request.user )
         if form.is_valid():
             form.save()
-            return redirect('/index')
+            return redirect('/vennik/profile.html') 
+        else:
+            form=UserChangeForm(instance=request.user)
+            args={'form':form}
+            return render(request,'vennik/edit_profile.html',args)       
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/vennik')
     else:
-        form = registrationForm()
+        form = RegistrationForm()
         args = {'form':form}
         return render(request,'vennik/register.html',args)    
 

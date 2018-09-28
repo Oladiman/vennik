@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,re_path
 from vennik import views
 from django.contrib.auth.views import login,logout
 urlpatterns = [
@@ -9,6 +9,8 @@ urlpatterns = [
     path('products.html', views.products, name='products'),
     # path('login.html' ,views.login ,name='login'),
     path('register.html',views.register ,name='register'),
+    path('profile.html',views.view_profile,name='view_profile'),
+    re_path(r'^profile/edit/$',views.edit_profile,name='edit_profile'),
     path('contact.html', views.contact ,name='contact'),
     path('single.html',views.single ,name='single'),
     path('self-contain.html',views.self_contain, name='self_contain'),
@@ -20,5 +22,5 @@ urlpatterns = [
     path('undeveloped-land.html',views.undeveloped,name='undeveloped'),
     path('properties-for-sale.html',views.properties,name='properties'),
     path('login.html',login,{'template_name':'vennik/login.html'}),
-    path('logout',logout,{'template_name':'vennik/logout.html'})
+    path('logout.html',logout,{'template_name':'vennik/logout.html'})
 ]

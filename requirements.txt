@@ -11,3 +11,4 @@ six==1.11.0
 wrapt==1.10.11
 gunicorn==19.9.0
 whitenoise==4.1
+python-decouple==3.1
