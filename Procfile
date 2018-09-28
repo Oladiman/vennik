@@ -1,1 +1,1 @@
-web: gunicorn unik.wsgi --log-file -
+web: gunicorn unik.wsgi:app --log-file -
