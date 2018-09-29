@@ -34,7 +34,7 @@ def edit_profile(request):
         form = UserChangeForm(request.POST,instance=request.user )
         if form.is_valid():
             form.save()
-            return redirect('/vennik/profile.html') 
+            return redirect('vennik/profile.html') 
         else:
             form=UserChangeForm(instance=request.user)
             args={'form':form}
