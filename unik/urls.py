@@ -18,7 +18,7 @@ from django.urls import path,include
 from unik import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('vennik/admin/', admin.site.urls),
+    # path('vennik/admin/', admin.site.urls),
     path('vennik/', include('vennik.urls')),
     path('',include('vennik.urls')),
     path('',views.login_redirect,name='login_redirect'),
